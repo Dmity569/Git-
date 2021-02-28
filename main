@@ -1,0 +1,34 @@
+import random, sys
+from PyQt5.QtGui import QPainter, QColor
+from PyQt5.QtWidgets import QWidget, QApplication, QPushButton
+
+
+class Example(QWidget):
+
+    def __init__(self):
+        super().__init__()
+        self.setGeometry(50, 50, 1000, 1000)
+        # self.button = QPushButton("кликни", self)
+        # self.button.clicked.connect(self.do)
+
+    def paintEvent(self, e):
+        qp = QPainter()
+        qp.begin(self)
+        self.drawRectangles(qp)
+        qp.end()
+
+    def drawRectangles(self, qp):
+        col = QColor(0, 0, 0)
+        col.setNamedColor('#d4d4d4')
+        qp.setPen(col)
+        a = random.choice(range(100, 400))
+        b = random.choice(range(500))
+        qp.setBrush(QColor(200, 200, 0))
+        qp.drawEllipse(a, a, b, b)
+
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    ex = Example()
+    ex.show()
+    sys.exit(app.exec_())
